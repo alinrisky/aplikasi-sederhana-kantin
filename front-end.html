@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KantinKu - Aplikasi Penjualan</title>
+    <link rel="stylesheet" href="front-end.css">
+</head>
+<body>
+<div id="app">
+    <section id="loginPage" class="login-page">
+        <div class="login-card">
+            <div class="brand-logo">🍜</div>
+            <h1>KantinKu</h1>
+            <p class="muted">Aplikasi Penjualan Kantin</p>
+            <div class="role-switch">
+                <button class="role active" data-role="Kasir">Kasir</button>
+                <button class="role" data-role="Owner">Owner</button>
+            </div>
+            <form id="loginForm">
+                <input id="username" placeholder="Username" required>
+                <div class="password-wrap">
+                    <input id="password" type="password" placeholder="Password" required>
+                    <button type="button" id="togglePassword" aria-label="Lihat password">👁</button>
+                </div>
+                <button class="btn primary full">Masuk →</button>
+            </form>
+            <small class="muted">Demo: isi username dan password bebas</small>
+        </div>
+    </section>
+
+    <div id="mainApp" class="hidden">
+        <header class="topbar">
+            <div class="brand-mini"><span>🍜</span><div><b>KantinKu</b><small id="roleLabel">Kasir</small></div></div>
+            <div class="top-actions"><span id="today"></span><button id="logoutBtn" class="icon-btn" title="Keluar">↪</button></div>
+        </header>
+
+        <main id="content"></main>
+
+        <nav class="bottom-nav">
+            <button data-page="dashboard"><span>⌂</span><small>Beranda</small></button>
+            <button data-page="menu"><span>▦</span><small>Menu</small></button>
+            <button data-page="transactions"><span>▤</span><small>Transaksi</small></button>
+            <button data-page="reports"><span>▥</span><small>Laporan</small></button>
+            <button data-page="profile"><span>♙</span><small>Profil</small></button>
+        </nav>
+    </div>
+</div>
+
+<div id="productModal" class="modal hidden">
+    <div class="modal-card">
+        <div class="modal-heading"><h2 id="modalTitle">Tambah Menu</h2><button class="icon-btn" data-close="productModal">✕</button></div>
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            <label>Nama Menu</label><input id="productName" required placeholder="Contoh: Mie Ayam">
+            <label>Kategori</label>
+            <select id="productCategory"><option>Makanan</option><option>Minuman</option><option>Snack</option><option>Buah-buahan</option></select>
+            <label>Harga (Rp)</label><input id="productPrice" type="number" min="1" required>
+            <label>Stok</label><input id="productStock" type="number" min="0" required>
+            <label>URL gambar menu</label><input id="productImage" placeholder="https://...">
+            <div class="modal-actions"><button type="button" class="btn light" data-close="productModal">Batal</button><button class="btn primary">Simpan Menu</button></div>
+        </form>
+    </div>
+</div>
+
+<div id="paymentModal" class="modal hidden">
+    <div class="modal-card">
+        <div class="modal-heading"><h2>Pembayaran</h2><button class="icon-btn" data-close="paymentModal">✕</button></div>
+        <div class="total-box"><small>Total Belanja</small><h2 id="paymentTotal">Rp0</h2></div>
+        <label>Metode Pembayaran</label>
+        <select id="paymentMethod"><option value="Tunai">💵 Tunai</option><option value="QRIS">📱 QRIS (simulasi)</option><option value="Bank">🏦 Transfer Bank (simulasi)</option></select>
+        <label>Uang Diterima (Rp)</label><input id="cashReceived" type="number" min="0" value="0">
+        <p class="change-text">Kembalian: <b id="changeValue">Rp0</b></p>
+        <button id="confirmPayment" class="btn primary full">Konfirmasi Pembayaran</button>
+    </div>
+</div>
+
+<div id="receiptModal" class="modal hidden">
+    <div class="modal-card receipt">
+        <div class="receipt-head"><div class="brand-logo small-logo">🍜</div><h2>KantinKu</h2><p>Struk Transaksi</p></div>
+        <div id="receiptContent"></div>
+        <button class="btn primary full" id="printReceipt">Cetak Struk</button>
+        <button class="btn light full" data-close="receiptModal">Tutup</button>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="front-end.js"></script>
+</body>
+</html>
